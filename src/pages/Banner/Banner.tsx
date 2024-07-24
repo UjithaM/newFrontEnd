@@ -39,9 +39,9 @@ const Banner = () => {
     },
     {
       bgColor: "bg-yellow-200",
-      imgLeft: "src/assets/img/bike.svg",
-      imgMiddle: "src/assets/img/banner-bike.png",
-      imgRight: "src/assets/img/banner-bike.png",
+      imgLeft: "https://www.dpmco.com/public/images/product/discover-125-drl1.png",
+      imgMiddle: "https://www.dpmco.com/public/images/product/ct-100-es.png",
+      imgRight: "https://www.dpmco.com/public/images/product/discover-125-drl1.png",
       text: (
         <>
           Get the best bikes at the best prices!
@@ -84,26 +84,27 @@ const Banner = () => {
     <>
       {/* Search Bar */}
       <div className=" p-4 text-center absolute z-20 top-80 w-full">
-        <div className="search-container relative flex items-center w-1/2 max-[555px]:w-fit mx-auto">
-          <i className="fas fa-search search-icon absolute left-3 text-gray-500"></i>
-          <input
-            type="text"
-            className="form-control pl-10 pr-32 h-[40px] rounded-[12px] bg-[#D9D9D9] font-darker_grotesque"
-            id="searchBar"
-            placeholder="Search your product here..."
-          />
-          <a
-            href="#"
-            className="search-button absolute right-2 bg-[#6D6D6D] text-white h-[30px] w-[121px] rounded-[5px] font-poppins max-[644px]:w-[82px] max-[644px]:h-[30px]"
-          >
-            <button
-              className="search-button absolute right-2 bg-[#6D6D6D] text-white h-[30px] w-[121px] rounded-[5px] font-poppins max-[644px]:w-[82px] max-[644px]:h-[30px]"
-              id="searchButton"
-            >
-              Search
-            </button>
-          </a>
-        </div>
+      <div className="search-container relative flex items-center w-1/2 max-[555px]:w-fit mx-auto">
+              <i className="fas fa-search search-icon absolute left-3 text-gray-500"></i>
+              <input
+                type="text"
+                className="form-control pl-10 pr-32 h-[40px] rounded-[12px] bg-[#D9D9D9] font-darker_grotesque"
+                id="searchBar"
+                placeholder="Search your product here..."
+              />
+              <a
+                href="#"
+                className="search-button absolute right-2 bg-[#6D6D6D] text-white h-[30px] w-[121px] rounded-[5px] font-poppins max-[644px]:w-[82px] max-[644px]:h-[30px]"
+              >
+                <button
+                  className="search-button absolute right-2 bg-[#6D6D6D] text-white h-[30px] w-[121px] rounded-[5px] font-poppins max-[644px]:w-[82px] max-[644px]:h-[30px]"
+                  id="searchButton"
+                >
+                  Search
+                </button>
+              </a>
+            </div>
+
       </div>
       <TransitionGroup>
         <CSSTransition
