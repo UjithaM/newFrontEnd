@@ -18,17 +18,17 @@ function Nav() {
     const handleLinkClick = (event) => {
         const value = event.target.value;
         if (value === 'laptops'){
-            navigate('/itemSerch/laptops');
+            navigate('/itemSearch/laptops');
         } else if (value === 'phones'){
-            navigate('/itemSerch/phones');
+            navigate('/itemSearch/phones');
         } else if (value === 'microphones'){
-            navigate('/itemSerch/microphones');
+            navigate('/itemSearch/microphones');
         } else if (value === 'bikes'){
-            navigate('/itemSerch/bikes');
+            navigate('/itemSearch/bikes');
         } else if (value === 'cars'){
-            navigate('/itemSerch/cars');
+            navigate('/itemSearch/cars');
         }
-    }
+    };
 
     return (
         <>
