@@ -1,0 +1,18 @@
+.blur-fade-enter {
+    opacity: 1;
+    filter: blur(10px);
+}
+.blur-fade-enter-active {
+    opacity: 1;
+    filter: blur(0);
+    transition: opacity 1000ms, filter 1000ms;
+}
+.blur-fade-exit {
+    opacity: 1;
+    filter: blur(0);
+}
+.blur-fade-exit-active {
+    opacity: 0;
+    filter: blur(10px);
+    transition: opacity 1000ms, filter 1000ms;
+}
