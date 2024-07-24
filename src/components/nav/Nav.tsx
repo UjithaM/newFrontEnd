@@ -96,17 +96,35 @@ function Nav() {
             {isMenuOpen && (
                 <div className="mobile-menu bg-white w-[40%] h-full md:h-auto md:w-auto p-4 absolute top-[3.7rem]  left-0 md:static min-[767px]:hidden z-[999999999999]">
                     <ul className="flex flex-col items-start space-y-4 ">
-                        <a href="/home"><li className="text-black text-sm font-normal py-1 px-2 rounded-lg transition duration-300 font-poppins text-[18px]">Home</li></a>
-                        <a href="/itemSerch"><li className="text-black text-sm font-normal py-1 px-2 rounded-lg transition duration-300 font-poppins text-[18px]">Products</li></a>
-                        <a href="/home"><li className="text-black text-sm font-normal py-1 px-2 rounded-lg transition duration-300 font-poppins text-[18px]">About Us</li></a>
-                        <a href="/contactUs"><li className="text-black text-sm font-normal py-1 px-2 rounded-lg transition duration-300 font-poppins text-[18px]">Contact Us</li></a>
-                        <li className="text-black text-sm font-normal py-1 px-2 rounded-lg transition duration-300 font-poppins text-[18px]">
-                            <select className="text-white text-sm font-normal py-1 px-2 rounded-lg bg-[#2f80ff] transition duration-300 w-[100px] font-poppins"  onChange={handleSelectChange}>
-                                <option value="" disabled={true} selected={true}>Register</option>
-                                <option value="option1">Register</option>
-                                <option value="option2">Sign In</option>
+                        <a href="/home">
+                            <li className="text-black text-sm font-normal py-1 px-2 rounded-lg transition duration-300 font-poppins text-[18px]">Home</li>
+                        </a>
+
+                            <select
+                                className=" text-sm font-normal py-1 px-1 rounded-lg  transition duration-300 w-[100px] font-poppins"
+                                onChange={handleLinkClick}>
+                                <option value="" disabled={true} selected={true}>Products</option>
+                                <option value="laptops">Laptops</option>
+                                <option value="phones">Phones</option>
+                                <option value="microphones">Microphones</option>
+                                <option value="bikes">Bikes</option>
+                                <option value="cars">Cars</option>
                             </select>
-                        </li>
+
+                        <a href="/home">
+                            <li className="text-black text-sm font-normal py-1 px-2 rounded-lg transition duration-300 font-poppins text-[18px]">About
+                                Us
+                            </li>
+                        </a>
+                        <a href="/contactUs">
+                            <li className="text-black text-sm font-normal py-1 px-2 rounded-lg transition duration-300 font-poppins text-[18px]">Contact
+                                Us
+                            </li>
+                        </a>
+                        <a href="/signUp">
+                        <li className="text-black text-sm font-normal py-1 px-2 rounded-lg transition duration-300 font-poppins text-[18px]">Register
+                            </li>
+                        </a>
                     </ul>
                 </div>
             )}
