@@ -17,12 +17,7 @@ function App() {
                   <Route path="/signUp" element={<Signup/>} />
                   <Route path="/" element={<LandingPage/>} />
                   <Route path="/home" element={<LandingPage/>} />
-                  <Route path="/itemSerch" element={<ItemSearch/>} />
-                  <Route path="/itemSerch/laptops" element={<ItemSearch/>} />
-                  <Route path="/itemSerch/phones" element={<ItemSearch/>} />
-                  <Route path="/itemSerch/microphones" element={<ItemSearch/>} />
-                  <Route path="/itemSerch/bikes" element={<ItemSearch/>} />
-                  <Route path="/itemSerch/cars" element={<ItemSearch/>} />
+                  <Route path="/itemSearch/:category" element={<ItemSearch />} />
                   <Route path="/contactUs" element={<ContactUsPage/>} />
                   {/*<Route path="/storeList" element={<StoreList/>} />*/}
               </Routes>
