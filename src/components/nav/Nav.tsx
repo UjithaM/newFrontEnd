@@ -13,16 +13,7 @@ function Nav() {
 
     const navigate = useNavigate(); // Hook to get the navigate function
 
-    const handleSelectChange = (event) => {
-        const value = event.target.value;
-        if (value === 'option1') {
-            // Navigate to the Register page
-            navigate('/signUp');
-        } else if (value === 'option2') {
-            // Navigate to the Sign In page
-            navigate('/');
-        }
-    };
+
 
     const handleLinkClick = (event) => {
         const value = event.target.value;
