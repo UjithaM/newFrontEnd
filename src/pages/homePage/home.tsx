@@ -1,8 +1,7 @@
-import ImgCard from "../../components/imgCard";
+
 import "../homePage/home.css";
 import images from "../../assets/constants/image.js";
 import Footer from "../../components/footer/footer.tsx";
-import { Image } from "@nextui-org/react";
 import Banner from "../../components/banner/Banner.tsx";
 
 function HomePage() {

@@ -6,7 +6,6 @@ import HomePage from "../homePage/home.tsx";
 
 import Category from "../category/Category.tsx";
 import Landing from "../Landing/Landing.tsx";
-import Banner from "../../components/banner/Banner.tsx";
 
 
 function LandingPage() {
