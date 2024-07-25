@@ -20,23 +20,18 @@ function App() {
     });
     AOS.refresh();
   }, []);
-  
-  return (
-      <>
 
-          <BrowserRouter>
-              <Routes>
-                  <Route path="/signUp" element={<Signup/>} />
-                  <Route path="/" element={<LandingPage/>} />
-                  <Route path="/home" element={<LandingPage/>} />
-                  <Route path="/itemSearch/:category" element={<ItemSearch />} />
-                  <Route path="/contactUs" element={<ContactUsPage/>} />
-                  {/*<Route path="/storeList" element={<StoreList/>} />*/}
-              </Routes>
-          </BrowserRouter>
-
-    </>
-  );
+    return (
+        <BrowserRouter>
+            <Routes>
+                <Route path="/signUp" element={<Signup />} />
+                <Route path="/" element={<LandingPage />} />
+                <Route path="/home" element={<LandingPage />} />
+                <Route path="/itemSearch/:category" element={<ItemSearch />} />
+                <Route path="/contactUs" element={<ContactUsPage />} />
+            </Routes>
+        </BrowserRouter>
+    );
 }
 
 export default App;
