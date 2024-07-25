@@ -1,46 +1,151 @@
+import { useState, useEffect } from 'react';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faShoppingCart, faCreditCard } from '@fortawesome/free-solid-svg-icons';
+interface Product {
+    _id: string;
+    title: string;
+    image: string;
+    description: string;
+    price: string;
+    site: string;
+}
 
-function StoreDetails({ stores }) {
+interface StoreDetailsProps {
+    category: string;
+}
+
+const PAGE_SIZE = 3;
+
+function StoreDetails({ category }: StoreDetailsProps) {
+    const [products, setProducts] = useState<Product[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
+
+    useEffect(() => {
+        const fetchProducts = async (page: number, category: string) => {
+            setLoading(true);
+            setError(null);
+            try {
+                const response = await fetch(`${import.meta.env.VITE_API_URL}${category}?page=${page}`, {
+                    headers: {
+                        'X-API-KEY': import.meta.env.VITE_API_KEY,
+                    },
+                });
+                const data = await response.json();
+                if (category === 'laptops') {
+                    setProducts(data.laptops);
+                }else if (category === 'phones') {
+                    setProducts(data.phones);
+                }else if (category === 'bikes') {
+                    setProducts(data.bike);
+                }else if (category === 'cars') {
+                    setProducts(data.car);
+                }else if (category === 'microphones') {
+                    setProducts(data.microphones);
+                }
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+
+
+                setTotalPages(data.totalPages || 1);
+            } catch (e: any) {
+                setError(e.message);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchProducts(currentPage, category);
+    }, [category, currentPage]);
+
+    if (loading) return <p>Loading...</p>;
+    if (error) return <p>Error: {error}</p>;
+
+    const handleMoreInfoClick = (productId: string) => {
+        console.log(`More info clicked for product ${productId}`);
+    };
+
+    const handlePageChange = (newPage: number) => {
+        setCurrentPage(newPage);
+    };
+
+    const startPage = Math.max(1, currentPage - Math.floor(PAGE_SIZE / 2));
+    const endPage = Math.min(totalPages, startPage + PAGE_SIZE - 1);
+
     return (
-        <div className="mt-8">
-            <h2 className="text-2xl font-bold mb-4">Best Samsung Galaxy S24 Ultra Prices</h2>
-            {['Daraz', 'Ebay', 'Kapruka'].map((storeName, storeIndex) => (
-                <div className="mb-8" key={storeIndex}>
-                    <h3 className={`text-xl font-bold mb-4 ${storeName === 'Daraz' ? 'text-orange-400' : storeName === 'Ebay' ? 'text-blue-400' : 'text-green-400'}`}>{storeName}</h3>
-                    <div className="space-y-4">
-                        {stores.map((store, index) => (
-                            <div
-                                key={index}
-                                className={`flex flex-col lg:flex-row items-start lg:items-center justify-between p-4 rounded-lg shadow ${store.recommended ? 'border-2 border-green-500' : 'border'}`}
+        <div className="container mx-auto px-4">
+            <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                {products.map(product => (
+                    <div key={product._id} className="relative max-w-xs rounded-lg overflow-hidden shadow-lg bg-white transition-transform transform hover:scale-105" onClick={() =>handleMoreInfoClick(product._id)}>
+                        <div className="h-64 overflow-hidden">
+                            <img
+                                className="w-full h-full object-cover transition-transform duration-300 ease-in-out transform group-hover:scale-110"
+                                src={product.image[0]}
+                                alt={`Product ${product._id}`}
+                            />
+                        </div>
+                        <div className="px-6 py-4">
+                            <div className="font-semibold text-lg mb-2">{product.title}</div>
+                            <p className="text-gray-800 text-sm mb-2">Rs: {product.price}</p>
+                            <div className="font-medium text-sm mb-4 text-gray-600">From: {product.site}</div>
+                            <button
+                                className="bg-gradient-to-r from-purple-500 to-indigo-500 text-white py-2 px-4 rounded hover:from-purple-600 hover:to-indigo-600 transition-colors duration-300 w-full z-10 relative"
+                                onClick={() => handleMoreInfoClick(product._id)}
                             >
-                                <div className="flex items-start lg:items-center space-x-4 w-full lg:w-auto mb-4 lg:mb-0">
-                                    <img src="https://antdisplay.com/pub/media/magefan_blog/sj05.jpg" alt={store.name} className="w-20 h-20 rounded-lg" />
-                                    <div className="flex flex-col lg:flex-row justify-between w-full lg:w-auto">
-                                        <div className="lg:mr-24">
-                                            {store.recommended && <span className="text-green-500 font-bold">Recommend*</span>}
-                                            <p className="text-xl font-bold">{store.price}</p>
-                                        </div>
-                                        <div className="lg:text-end lg:ml-28">
-                                            <p className="text-gray-600">{`Samsung Galaxy S24 Ultra (${store.color})`}</p>
-                                            <p className="text-red-500">{store.warranty} . Call {store.phone}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="flex space-x-2">
-                                    <button className="btn btn-neutral" style={{ backgroundColor: '#d9d9d9', color: 'black', border: 'none' }}>
-                                        <FontAwesomeIcon icon={faShoppingCart} className="mr-2" style={{ color: 'black' }} /> Add to Cart
-                                    </button>
-                                    <button className="btn btn-secondary" style={{ backgroundColor: '#008000', border: 'none' }}>
-                                        <FontAwesomeIcon icon={faCreditCard} className="mr-2" /> Buy Item
-                                    </button>
-                                </div>
-                            </div>
-                        ))}
+                                More Information
+                            </button>
+                        </div>
+                        <div
+                            className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-0 hover:opacity-80 transition-opacity duration-300 flex items-center justify-center p-4"
+                        >
+                            <p className="text-white text-center text-xs md:text-sm">
+                                {product.description}
+                            </p>
+                        </div>
                     </div>
-                </div>
-            ))}
+                ))}
+            </div>
+            <div className="flex justify-center mt-8 space-x-2">
+                <button
+                    className={`px-4 py-2 mx-1 rounded-full ${currentPage === 1 ? 'bg-gray-300 cursor-not-allowed' : 'bg-green-500 hover:bg-green-600'} text-white transition-colors duration-300`}
+                    onClick={() => handlePageChange(1)}
+                    disabled={currentPage === 1}
+                >
+                    First
+                </button>
+                <button
+                    className={`px-4 py-2 mx-1 rounded-full ${currentPage === 1 ? 'bg-gray-300 cursor-not-allowed' : 'bg-green-500 hover:bg-green-600'} text-white transition-colors duration-300`}
+                    onClick={() => handlePageChange(currentPage - 1)}
+                    disabled={currentPage === 1}
+                >
+                    Previous
+                </button>
+                {Array.from({ length: endPage - startPage + 1 }, (_, index) => (
+                    <button
+                        key={startPage + index}
+                        className={`px-4 py-2 mx-1 rounded-full ${currentPage === startPage + index ? 'bg-blue-700' : 'bg-blue-500 hover:bg-blue-600'} text-white transition-colors duration-300`}
+                        onClick={() => handlePageChange(startPage + index)}
+                    >
+                        {startPage + index}
+                    </button>
+                ))}
+                <button
+                    className={`px-4 py-2 mx-1 rounded-full ${currentPage === totalPages ? 'bg-gray-300 cursor-not-allowed' : 'bg-green-500 hover:bg-green-600'} text-white transition-colors duration-300`}
+                    onClick={() => handlePageChange(currentPage + 1)}
+                    disabled={currentPage === totalPages}
+                >
+                    Next
+                </button>
+                <button
+                    className={`px-4 py-2 mx-1 rounded-full ${currentPage === totalPages ? 'bg-gray-300 cursor-not-allowed' : 'bg-green-500 hover:bg-green-600'} text-white transition-colors duration-300`}
+                    onClick={() => handlePageChange(totalPages)}
+                    disabled={currentPage === totalPages}
+                >
+                    Last
+                </button>
+            </div>
         </div>
     );
 }
