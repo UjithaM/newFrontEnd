@@ -26,11 +26,10 @@ function Nav() {
 
     return (
         <>
-            <nav className="px-5 w-full h-[60px] bg-[#FFFFFF] shadow-md flex justify-between items-center fixed z-[99999999999999999999] overflow-x-hidden">
+           <nav className="px-5 w-full h-[60px] bg-[#FFFFFF] shadow-md flex justify-between items-center fixed top-0 left-0 w-full z-50 overflow-x-hidden overflow-hidden">
                 {/* Logo */}
                 <div className="logo flex items-center max-[767px]:absolute max-[767px]:right-[2rem]">
-                    <img src={images.Logo} alt="logo" className="h-8 w-auto mr-2" />
-                    <h1 className="text-lg font-semibold text-white" style={{ background: 'linear-gradient(to right, #b927fc 0%, #2c64fc 100%)', WebkitBackgroundClip: 'text', backgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>LOGO</h1>
+                    <img src={images.Logo} alt="logo" className="h-32 w-auto mr-2" />
                 </div>
 
                 {/* Desktop Menu */}
