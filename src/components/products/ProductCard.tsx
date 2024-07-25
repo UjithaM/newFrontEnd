@@ -1,4 +1,4 @@
-import React from "react";
+
 import LandingButton from "../../pages/Landing/LandingButton";
 
 const ProductCard = ({ data ,btnColor,textColor }) => {
