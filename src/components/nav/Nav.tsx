@@ -13,14 +13,20 @@ function Nav() {
 
     const navigate = useNavigate(); // Hook to get the navigate function
 
-    const handleSelectChange = (event) => {
+
+
+    const handleLinkClick = (event) => {
         const value = event.target.value;
-        if (value === 'option1') {
-            // Navigate to the Register page
-            navigate('/signUp');
-        } else if (value === 'option2') {
-            // Navigate to the Sign In page
-            navigate('/');
+        if (value === 'laptops'){
+            navigate('/itemSearch/laptops');
+        } else if (value === 'mobilePhones'){
+            navigate('/itemSearch/mobilePhones');
+        } else if (value === 'microphones'){
+            navigate('/itemSearch/microphones');
+        } else if (value === 'bikes'){
+            navigate('/itemSearch/bikes');
+        } else if (value === 'cars'){
+            navigate('/itemSearch/cars');
         }
     };
 
@@ -36,7 +42,18 @@ function Nav() {
                 {/* Desktop Menu */}
                 <ul className="hidden md:flex items-center">
                     <li className="ml-6"><a href="/home" className="text-black text-sm font-normal py-1 px-2n dev rounded-lg hover:bg-gray-100 transition duration-300 font-poppins text-[18px]">Home</a></li>
-                    <li className="ml-6"><a href="/itemSerch" className="text-black text-sm font-normal py-1 px-2 rounded-lg hover:bg-gray-100 transition duration-300 font-poppins text-[18px] ">Products</a></li>
+                    <li className="ml-6">
+                        <select
+                            className=" text-sm font-normal py-1 px-2 rounded-lg  transition duration-300 w-[100px] font-poppins"
+                            onChange={handleLinkClick}>
+                            <option value="" disabled={true} selected={true}>Products</option>
+                            <option value="laptops">Laptops</option>
+                            <option value="mobilePhones">Phones</option>
+                            <option value="microphones">Microphones</option>
+                            <option value="bikes">Bikes</option>
+                            <option value="cars">Cars</option>
+                        </select>
+                    </li>
                     <li className="ml-6">
                         <Link
                             to="/home/#aboutUs"
@@ -55,18 +72,12 @@ function Nav() {
                         </Link>
                     </li>
                     <li className="ml-6"><a href="/contactUs" className="text-black text-sm font-normal py-1 px-2 rounded-lg hover:bg-gray-100 transition duration-300 font-poppins text-[18px]">Contact Us</a></li>
-                    <li className="ml-6">
-                        <select className="text-white text-sm font-normal py-1 px-2 rounded-lg  bg-[#2f80ff] transition duration-300 w-[100px] font-poppins"  onChange={handleSelectChange}>
-                            <option value="" disabled={true} selected={true}>Register</option>
-                            <option value="option1">Register</option>
-                            <option value="option2">Sign In</option>
-                        </select>
-                    </li>
+                    <li className="ml-6"><a href="/signUp" className="text-black text-sm font-normal py-1 px-2 rounded-lg hover:bg-gray-100 transition duration-300 font-poppins text-[18px]">Register</a></li>
                 </ul>
 
                 {/* Hamburger Menu */}
                 <div className="hamburger md:hidden cursor-pointer " onClick={toggleMenu}>
-                    <span className="line w-6 h-0.5 bg-black block mb-1"></span>
+                <span className="line w-6 h-0.5 bg-black block mb-1"></span>
                     <span className="line w-6 h-0.5 bg-black block mb-1"></span>
                     <span className="line w-6 h-0.5 bg-black block mb-1"></span>
                 </div>
@@ -76,17 +87,35 @@ function Nav() {
             {isMenuOpen && (
                 <div className="mobile-menu bg-white w-[40%] h-full md:h-auto md:w-auto p-4 absolute top-[3.7rem]  left-0 md:static min-[767px]:hidden z-[999999999999]">
                     <ul className="flex flex-col items-start space-y-4 ">
-                        <a href="/home"><li className="text-black text-sm font-normal py-1 px-2 rounded-lg transition duration-300 font-poppins text-[18px]">Home</li></a>
-                        <a href="/itemSerch"><li className="text-black text-sm font-normal py-1 px-2 rounded-lg transition duration-300 font-poppins text-[18px]">Products</li></a>
-                        <a href="/home"><li className="text-black text-sm font-normal py-1 px-2 rounded-lg transition duration-300 font-poppins text-[18px]">About Us</li></a>
-                        <a href="/contactUs"><li className="text-black text-sm font-normal py-1 px-2 rounded-lg transition duration-300 font-poppins text-[18px]">Contact Us</li></a>
-                        <li className="text-black text-sm font-normal py-1 px-2 rounded-lg transition duration-300 font-poppins text-[18px]">
-                            <select className="text-white text-sm font-normal py-1 px-2 rounded-lg bg-[#2f80ff] transition duration-300 w-[100px] font-poppins"  onChange={handleSelectChange}>
-                                <option value="" disabled={true} selected={true}>Register</option>
-                                <option value="option1">Register</option>
-                                <option value="option2">Sign In</option>
+                        <a href="/home">
+                            <li className="text-black text-sm font-normal py-1 px-2 rounded-lg transition duration-300 font-poppins text-[18px]">Home</li>
+                        </a>
+
+                            <select
+                                className=" text-sm font-normal py-1 px-1 rounded-lg  transition duration-300 w-[100px] font-poppins"
+                                onChange={handleLinkClick}>
+                                <option value="" disabled={true} selected={true}>Products</option>
+                                <option value="laptops">Laptops</option>
+                                <option value="mobilePhones">Phones</option>
+                                <option value="microphones">Microphones</option>
+                                <option value="bikes">Bikes</option>
+                                <option value="cars">Cars</option>
                             </select>
-                        </li>
+
+                        <a href="/home">
+                            <li className="text-black text-sm font-normal py-1 px-2 rounded-lg transition duration-300 font-poppins text-[18px]">About
+                                Us
+                            </li>
+                        </a>
+                        <a href="/contactUs">
+                            <li className="text-black text-sm font-normal py-1 px-2 rounded-lg transition duration-300 font-poppins text-[18px]">Contact
+                                Us
+                            </li>
+                        </a>
+                        <a href="/signUp">
+                        <li className="text-black text-sm font-normal py-1 px-2 rounded-lg transition duration-300 font-poppins text-[18px]">Register
+                            </li>
+                        </a>
                     </ul>
                 </div>
             )}
