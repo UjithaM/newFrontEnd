@@ -2,7 +2,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 
-const Landing = ({ bannerImages =[] }) => {
+const Landing = ({ bannerImages }: { bannerImages: string[] }) => {
   const settings = {
     arrows: true,
     infinite: true,
