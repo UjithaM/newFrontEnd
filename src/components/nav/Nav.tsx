@@ -19,8 +19,8 @@ function Nav() {
         const value = event.target.value;
         if (value === 'laptops'){
             navigate('/itemSearch/laptops');
-        } else if (value === 'phones'){
-            navigate('/itemSearch/phones');
+        } else if (value === 'mobilePhones'){
+            navigate('/itemSearch/mobilePhones');
         } else if (value === 'microphones'){
             navigate('/itemSearch/microphones');
         } else if (value === 'bikes'){
@@ -48,7 +48,7 @@ function Nav() {
                             onChange={handleLinkClick}>
                             <option value="" disabled={true} selected={true}>Products</option>
                             <option value="laptops">Laptops</option>
-                            <option value="phones">Phones</option>
+                            <option value="mobilePhones">Phones</option>
                             <option value="microphones">Microphones</option>
                             <option value="bikes">Bikes</option>
                             <option value="cars">Cars</option>
@@ -96,7 +96,7 @@ function Nav() {
                                 onChange={handleLinkClick}>
                                 <option value="" disabled={true} selected={true}>Products</option>
                                 <option value="laptops">Laptops</option>
-                                <option value="phones">Phones</option>
+                                <option value="mobilePhones">Phones</option>
                                 <option value="microphones">Microphones</option>
                                 <option value="bikes">Bikes</option>
                                 <option value="cars">Cars</option>
