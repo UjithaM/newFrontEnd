@@ -1,9 +1,8 @@
-import React from "react";
+
 import Iphone from "../../assets/img/iPhone.svg";
 import Laptop from "../../assets/img/lap.svg";
 import MicroPhone from "../../assets/img/Microphone.svg";
 import Bike from "../../assets/img/bike.png";
-import Slider from "react-slick";
 import Car from "../../assets/img/car.png";
 import LandingButton from "../Landing/LandingButton";
 
