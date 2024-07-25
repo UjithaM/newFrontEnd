@@ -1,4 +1,4 @@
-import Logo from "../img/Logo.svg";
+import Logo from "../img/logo.png";
 import Phone from "../img/imageWheelPhone.svg";
 import Iphone from "../img/iPhone.svg";
 import Laptop from "../img/lap.svg";
