@@ -11,7 +11,7 @@ import otc from "../assets/img/companies/otc.png";
 import redtech from "../assets/img/companies/redtech.jpeg";
 import saleme from "../assets/img/companies/saleme.png";
 import xmobile from "../assets/img/companies/xmobile.jpeg";
-import patpatLk from "../assets/img/companies/dowlaod.jpeg";
+import patpatLk from "../assets/img/companies/download.jpeg";
 import { Button } from "@nextui-org/react";
 import Slider, { CustomArrowProps } from 'react-slick';
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
@@ -97,7 +97,7 @@ function StoreDetails({ category }: StoreDetailsProps) {
             setLoading(true);
             setError(null);
             try {
-                const response = await fetch(`${import.meta.env.VITE_API_URL}${category}?page=${page}`, {
+                const response = await fetch(`https://offdealz.lk/api/${category}?page=${page}`, {
                     headers: {
                         'X-API-KEY': import.meta.env.VITE_API_KEY,
                     },
