@@ -32,7 +32,7 @@ const Banner = ({ data }) => {
             <img
               src={data.image}
               alt="Banner"
-              className="scale-150 w-[150px] drop-shadow-2xl object-cover"
+              className={`scale-150 ${data.width} drop-shadow-2xl object-cover`}
             />
           </div>
           {/* third col */}
