@@ -21,8 +21,9 @@ function ItemSearch() {
                     </label>
                 </div>
                 <StoreDetails category={category || ''} />
-                <Footer />
+               
             </main>
+            <Footer />
         </>
     );
 }

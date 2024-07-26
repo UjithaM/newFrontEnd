@@ -24,11 +24,11 @@ function App() {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/signUp" element={<Signup />} />
                 <Route path="/" element={<LandingPage />} />
                 <Route path="/home" element={<LandingPage />} />
                 <Route path="/itemSearch/:category" element={<ItemSearch />} />
                 <Route path="/contactUs" element={<ContactUsPage />} />
+                <Route path="/signUp" element={<Signup />} />
             </Routes>
         </BrowserRouter>
     );

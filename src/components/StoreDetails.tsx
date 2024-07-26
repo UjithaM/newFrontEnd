@@ -68,7 +68,7 @@ function StoreDetails({ category }: StoreDetailsProps) {
             setLoading(true);
             setError(null);
             try {
-                const response = await fetch(`${import.meta.env.VITE_API_URL}${category}?page=${page}`, {
+                const response = await fetch(`https://offdealz.lk/api/${category}?page=${page}`, {
                     headers: {
                         'X-API-KEY': import.meta.env.VITE_API_KEY,
                     },

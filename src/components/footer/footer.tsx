@@ -1,125 +1,142 @@
+import {
+  FaBuilding,
+  FaCalendarAlt,
+  FaEnvelope,
+  FaFacebook,
+  FaInstagram,
+  FaLocationArrow,
+  FaMapMarkerAlt,
+  FaMobile,
+  FaTwitter,
+  FaWhatsapp,
+} from "react-icons/fa";
 import images from "../../assets/constants/image.js";
 
 export default function Footer() {
+  const FooterLinks = [
+    {
+      title: "Home",
+      link: "/",
+    },
+    {
+      title: "About",
+      link: "#aboutUs",
+    },
+    {
+      title: "Contact",
+      link: "/contactUs",
+    },
+
+    {
+      title: "Register",
+      link: "/signUp",
+    },
+    {
+      title: "Privacy Policy",
+      link: "/",
+    },
+    {
+      title: "Terms & Conditions",
+      link: "/",
+    },
+  ];
   return (
     <>
-      <div className="absolute top-full w-full h-[215px] bg-[#D9D9D9] max-[617px]:h-[386px]">
-        <div>
-          <div>
-            <div className="relative top-10">
-              <div className="logo flex items-center">
+      <div className="bg-[#EAFAF1]">
+        <div className="container">
+          <div className="grid md:grid-cols-3">
+            {/* company details */}
+            <div className="py-8 px-4">
+              <a>
                 <img
-                  src={images.Logo}
-                  alt="logo"
-                  className="h-[110px]  w-[111px] mr-2 max-[919px]:w-[72px] max-[781px]:w-[60px]"
-                />
-                <h1 className="  text-[60px] text-black max-[919px]:text-[40px] max-[781px]:text-[24px]">
-                  LOGO
-                </h1>
-                <img
-                  src={images.Line}
+                  src="src/assets/img/logo.png"
                   alt=""
-                  className="ml-14 max-[919px]:ml-[2.5rem]"
+                  className="w-[350px]"
                 />
-              </div>
-
-              <div className="-mt-[7.2rem] ml-[26rem] max-[919px]:ml-[17rem] max-[781px]:ml-[13rem] max-[617px]:ml-[54%] ">
-                <a href="#">
-                  <button className="bg-[#2E81FF] w-[135px] h-[41px] rounded-[30px] font-poppins text-[19px] font-[500] max-[781px]:w-[100px] max-[781px]:h-[31] max-[781px]:text-[15px]">
-                    Sign In
-                  </button>
-                  <br />
-                </a>
-                <a href="#">
-                  <button className="ml-[1.9rem] mt-3  font-poppins text-[19px] font-[500] text-[#797979] max-[781px]:text-[15px] max-[781px]:ml-[1.2rem]">
-                    Register
-                  </button>
-                </a>
-              </div>
+              </a>
             </div>
-
-            <div className="absolute right-[10%] -mt-[5.2rem] max-[1023px]:right-[2%] max-[617px]:left-0 max-[617px]:mt-24 ">
-              <ul className="max-[781px]:ml-[2.5rem] ">
-                <li>
-                  <a
-                    href=""
-                    className="hover:text-gray-900 text-[20px] font-[600] font-poppins leading-[30px] max-[781px]:text-[15px]"
-                  >
-                    Menu
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="/home"
-                    className="hover:text-gray-900 text-[18px] font-[400] font-poppins leading-[35px] max-[781px]:text-[12px]"
-                  >
-                    Home
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="/itemSerch"
-                    className="hover:text-gray-900 text-[18px] font-[400] font-poppins leading-[35px] max-[781px]:text-[12px]"
-                  >
-                    Products
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="/home"
-                    className="hover:text-gray-900 text-[18px] fonr-[400] font-poppins leading-[35px] max-[781px]:text-[12px]"
-                  >
-                    About Us
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="/contactUs"
-                    className="hover:text-gray-900 text-[18px] font-[400] font-poppins leading-[35px] max-[781px]:text-[12px]"
-                  >
-                    Contact Us
-                  </a>
-                </li>
-              </ul>
-
-              <div className="relative ml-40 -mt-[10.5rem] ">
-                <ul>
-                  <li>
-                    <a
-                      href="#"
-                      className="hover:text-gray-900 text-[20px] font-[600] font-poppins leading-[30px] max-[781px]:text-[15px]"
-                    >
-                      Services
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#"
-                      className="hover:text-gray-900 text-[18px] font-[400] font-poppins leading-[35px] max-[781px]:text-[12px]"
-                    >
-                      Buy Products
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#"
-                      className="hover:text-gray-900 text-[18px] font-[400] font-poppins leading-[35px] max-[781px]:text-[12px]"
-                    >
-                      Track Products
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#"
-                      className="hover:text-gray-900 text-[18px] fonr-[400] font-poppins leading-[35px] max-[781px]:text-[12px]"
-                    >
-                      Register as a seller
-                    </a>
-                  </li>
+            {/* Footer links */}
+            <div className="col-span-2 grid grid-cols-2 sm:grid-cols-3 md:pl-10">
+              <div className="py-8 px-4">
+                <h1 className="text-xl font-bold sm:text-left mb-3">
+                  Important Links
+                </h1>
+                <ul className="space-y-3">
+                  {FooterLinks.map((data, index) => (
+                    <li key={index}>
+                      <a
+                        href={data.link}
+                        className="text-gray-600 hover:text-black duration-300"
+                      >
+                        {data.title}
+                      </a>
+                    </li>
+                  ))}
                 </ul>
+              </div>
+              {/* company details */}
+              <div className="py-8 px-4 col-span-2 sm:col-auto">
+                <h1 className="text-xl font-bold sm:text-left mb-3">
+                  Contact Us
+                </h1>
+                <div>
+                  <div className="flex items-center gap-3">
+                    <FaMapMarkerAlt className="text-green-400 mr-2" />
+                    <p>Colombo, Sri Lanka</p>
+                  </div>
+
+                  <div className="flex items-center gap-3 mt-6">
+                    <FaMobile className="text-green-400 mr-2" />
+                    <p> 077 123 4567 / 077 123 4567</p>
+                  </div>
+
+                  <div className="flex items-center gap-3 mt-6">
+                    <FaEnvelope className="text-green-400 mr-2" />
+                    <p>info@offdealz@gmail.com</p>
+                  </div>
+
+                  <div className="flex items-center gap-3 mt-6">
+                    <FaBuilding className="text-green-400 mr-2" />
+                    <p>OffDealz (Pvt) Ltd</p>
+                  </div>
+                  {/* social links */}
+                  <div className="flex items-center gap-3 mt-6">
+                    <a href="#">
+                      <FaFacebook className="text-3xl text-green-400 hover:text-black duration-300" />
+                    </a>
+                    <a href="#">
+                      <FaInstagram className="text-3xl text-green-400 hover:text-black duration-300" />
+                    </a>
+                    <a href="#">
+                      <FaTwitter className="text-3xl text-green-400 hover:text-black duration-300" />
+                    </a>
+                    <a href="#">
+                      <FaWhatsapp className="text-3xl text-green-400 hover:text-black duration-300" />
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div className="py-8 px-4 col-span-2 sm:col-auto">
+                <h1 className="text-xl font-bold sm:text-left mb-3">
+                  Scan QR Code
+                </h1>
+                <div className="flex items-center gap-3">
+                  <div className="py-8 px-4">
+                    <a>
+                      <img
+                        src="src/assets/img/qr.png"
+                        alt=""
+                        className="w-[350px]"
+                      />
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
+        </div>
+        <div className="w-full bg-[#A9DFBF] text-center p-2">
+          <h1>Design & Developed by SoluTech (Pvt) Ltd</h1>
         </div>
       </div>
     </>

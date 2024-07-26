@@ -2,7 +2,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import images from '../../assets/constants/image.js';
 import { useState } from 'react';
-import {Link, useNavigate} from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { Link as ScrollLink } from 'react-scroll';
 
 function Nav() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -12,8 +13,6 @@ function Nav() {
     };
 
     const navigate = useNavigate(); // Hook to get the navigate function
-
-
 
     const handleLinkClick = (event) => {
         const value = event.target.value;
@@ -40,7 +39,7 @@ function Nav() {
 
                 {/* Desktop Menu */}
                 <ul className="hidden md:flex items-center">
-                    <li className="ml-6"><a href="/home" className="text-black text-sm font-normal py-1 px-2n dev rounded-lg hover:bg-gray-100 transition duration-300 font-poppins text-[18px]">Home</a></li>
+                    <li className="ml-6"><a href="/home" className="text-black text-sm font-normal py-1 px-2 rounded-lg hover:bg-gray-100 transition duration-300 font-poppins text-[18px]">Home</a></li>
                     <li className="ml-6">
                         <select
                             className=" text-sm font-normal py-1 px-2 rounded-lg  transition duration-300 w-[100px] font-poppins"
@@ -54,21 +53,14 @@ function Nav() {
                         </select>
                     </li>
                     <li className="ml-6">
-                        <Link
-                            to="/home/#aboutUs"
-                            onClick={() => {
-                                // Ensure the page has loaded before scrolling
-                                setTimeout(() => {
-                                    const element = document.querySelector('#aboutUs');
-                                    if (element) {
-                                        element.scrollIntoView({ behavior: 'smooth' });
-                                    }
-                                }, 100);
-                            }}
+                        <ScrollLink
+                            to="aboutUs"
+                            smooth={true}
+                            duration={500}
                             className="text-black text-sm font-normal py-1 px-2 rounded-lg hover:bg-gray-100 transition duration-300 font-poppins text-[18px]"
                         >
                             About Us
-                        </Link>
+                        </ScrollLink>
                     </li>
                     <li className="ml-6"><a href="/contactUs" className="text-black text-sm font-normal py-1 px-2 rounded-lg hover:bg-gray-100 transition duration-300 font-poppins text-[18px]">Contact Us</a></li>
                     <li className="ml-6"><a href="/signUp" className="text-black text-sm font-normal py-1 px-2 rounded-lg hover:bg-gray-100 transition duration-300 font-poppins text-[18px]">Register</a></li>
@@ -76,7 +68,7 @@ function Nav() {
 
                 {/* Hamburger Menu */}
                 <div className="hamburger md:hidden cursor-pointer " onClick={toggleMenu}>
-                <span className="line w-6 h-0.5 bg-black block mb-1"></span>
+                    <span className="line w-6 h-0.5 bg-black block mb-1"></span>
                     <span className="line w-6 h-0.5 bg-black block mb-1"></span>
                     <span className="line w-6 h-0.5 bg-black block mb-1"></span>
                 </div>
@@ -84,36 +76,36 @@ function Nav() {
 
             {/* Mobile Menu */}
             {isMenuOpen && (
-                <div className="mobile-menu bg-white w-[40%] h-full md:h-auto md:w-auto p-4 absolute top-[3.7rem]  left-0 md:static min-[767px]:hidden z-[999999999999]">
+                <div className="mobile-menu bg-white w-[40%] h-full md:h-auto md:w-auto p-4 absolute top-[3.7rem] left-0 md:static min-[767px]:hidden z-[999999999999]">
                     <ul className="flex flex-col items-start space-y-4 ">
                         <a href="/home">
                             <li className="text-black text-sm font-normal py-1 px-2 rounded-lg transition duration-300 font-poppins text-[18px]">Home</li>
                         </a>
 
-                            <select
-                                className=" text-sm font-normal py-1 px-1 rounded-lg  transition duration-300 w-[100px] font-poppins"
-                                onChange={handleLinkClick}>
-                                <option value="" disabled={true} selected={true}>Products</option>
-                                <option value="laptops">Laptops</option>
-                                <option value="mobilePhones">Phones</option>
-                                <option value="microphones">Microphones</option>
-                                <option value="bikes">Bikes</option>
-                                <option value="cars">Cars</option>
-                            </select>
+                        <select
+                            className=" text-sm font-normal py-1 px-1 rounded-lg  transition duration-300 w-[100px] font-poppins"
+                            onChange={handleLinkClick}>
+                            <option value="" disabled={true} selected={true}>Products</option>
+                            <option value="laptops">Laptops</option>
+                            <option value="mobilePhones">Phones</option>
+                            <option value="microphones">Microphones</option>
+                            <option value="bikes">Bikes</option>
+                            <option value="cars">Cars</option>
+                        </select>
 
-                        <a href="/home">
-                            <li className="text-black text-sm font-normal py-1 px-2 rounded-lg transition duration-300 font-poppins text-[18px]">About
-                                Us
-                            </li>
-                        </a>
+                        <ScrollLink
+                            to="aboutUs"
+                            smooth={true}
+                            duration={500}
+                            className="text-black text-sm font-normal py-1 px-2 rounded-lg transition duration-300 font-poppins text-[18px]"
+                        >
+                            About Us
+                        </ScrollLink>
                         <a href="/contactUs">
-                            <li className="text-black text-sm font-normal py-1 px-2 rounded-lg transition duration-300 font-poppins text-[18px]">Contact
-                                Us
-                            </li>
+                            <li className="text-black text-sm font-normal py-1 px-2 rounded-lg transition duration-300 font-poppins text-[18px]">Contact Us</li>
                         </a>
                         <a href="/signUp">
-                        <li className="text-black text-sm font-normal py-1 px-2 rounded-lg transition duration-300 font-poppins text-[18px]">Register
-                            </li>
+                            <li className="text-black text-sm font-normal py-1 px-2 rounded-lg transition duration-300 font-poppins text-[18px]">Register</li>
                         </a>
                     </ul>
                 </div>
