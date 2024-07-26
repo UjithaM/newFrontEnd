@@ -2,14 +2,21 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 
+import "../../pages/Landing/landing.css";
+
+
+
 const Landing = ({ bannerImages }: { bannerImages: string[] }) => {
+
   const settings = {
     arrows: true,
     infinite: true,
+    dots: true,
+    dotsClass: "slick-dots",
     speed: 800,
     slidesToShow: 1,
     slidesToScroll: 1,
-    autoplaySpeed: 5000,
+    autoplaySpeed: 4000, 
     cssEase: "ease-in-out",
     pauseOnHover: false,
     pauseOnFocus: true,

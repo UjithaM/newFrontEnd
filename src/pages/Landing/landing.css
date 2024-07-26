@@ -1,0 +1,75 @@
+/* Custom styles for Slick Slider dots */
+.slick-dots {
+    bottom: 10px;
+    /* Adjust the position */
+}
+
+.slick-prev,
+.slick-next {
+    display: block;
+}
+
+/* Default dot color */
+.slick-dots li button:before {
+    color: white !important;
+    /* Replace #000 with your desired color */
+
+}
+
+/* Active dot color */
+.slick-dots .slick-active button:before {
+    color: black !important;
+    /* Replace #ff0000 with your desired active dot color */
+}
+
+/* Default dot size */
+.slick-dots li button:before {
+    font-size: 12px;
+    /* Increase or decrease to change dot size */
+    line-height: 1;
+    /* Adjust to center dot */
+    color: #000;
+    /* Dot color */
+}
+
+
+
+
+/* Custom styles for Slick Slider arrows */
+.slick-prev,
+.slick-next {
+    z-index: 1;
+    /* Ensure arrows are above other elements */
+    width: 40px;
+    /* Adjust width as needed */
+    height: 40px;
+    /* Adjust height as needed */
+    border-radius: 50%;
+    /* Adjust border radius if needed */
+}
+
+.slick-prev::before,
+.slick-next::before {
+    font-size: 24px;
+    /* Adjust font size as needed */
+    color: #fff;
+    /* Adjust arrow color as needed */
+}
+
+
+.slick-prev {
+    left: 10px;
+    /* Adjust to avoid overlapping */
+}
+
+.slick-next {
+    right: 10px;
+    /* Adjust to avoid overlapping */
+}
+
+/* Remove outline and border on focus */
+.slick-slide img:focus, 
+.slick-slide img:active {
+  outline: none; /* Remove outline */
+  border: none; /* Remove border */
+}

@@ -23,7 +23,7 @@ const ProductCard = ({ data ,btnColor,textColor }) => {
               {/* hover button */}
               <div className="hidden group-hover:flex absolute top-1/2  -translate-y-1/2 left-1/2 -translate-x-1/2 h-full w-full text-center group-hover:backdrop-blur-sm justify-center items-center duration-200">
                 <LandingButton
-                  text={"Direct"}
+                  text={"Show More"}
                   bgColor={btnColor}
                   textColor={"text-white"}
                 />
