@@ -1,4 +1,4 @@
-import React from "react";
+
 import { FaMapMarkerAlt, FaEnvelope, FaBuilding, FaCalendarAlt } from 'react-icons/fa';
 
 const AboutUsPage = () => {

@@ -1,16 +1,13 @@
 import {
   FaBuilding,
-  FaCalendarAlt,
   FaEnvelope,
   FaFacebook,
   FaInstagram,
-  FaLocationArrow,
   FaMapMarkerAlt,
   FaMobile,
   FaTwitter,
   FaWhatsapp,
 } from "react-icons/fa";
-import images from "../../assets/constants/image.js";
 
 export default function Footer() {
   const FooterLinks = [
