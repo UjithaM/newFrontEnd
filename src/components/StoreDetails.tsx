@@ -11,15 +11,41 @@ import otc from "../assets/img/companies/otc.png";
 import redtech from "../assets/img/companies/redtech.jpeg";
 import saleme from "../assets/img/companies/saleme.png";
 import xmobile from "../assets/img/companies/xmobile.jpeg";
-import {Button, Slider} from "@nextui-org/react";
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
+import patpatLk from "../assets/img/companies/dowlaod.jpeg";
+import { Button } from "@nextui-org/react";
+import Slider, { CustomArrowProps } from 'react-slick';
+import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 
+const NextArrow: React.FC<CustomArrowProps> = (props) => {
+    const { className, style, onClick } = props;
+    return (
+        <div
+            className={`${className} absolute top-1/2 right-0 transform -translate-y-1/2 rounded-full p-2 cursor-pointer z-10`}
+            style={{ ...style, display: 'block' }}
+            onClick={onClick}
+        >
+            <FaArrowRight />
+        </div>
+    );
+};
+
+const PrevArrow: React.FC<CustomArrowProps> = (props) => {
+    const { className, style, onClick } = props;
+    return (
+        <div
+            className={`${className} absolute top-1/2 left-0 transform -translate-y-1/2 rounded-full p-2 cursor-pointer z-10`}
+            style={{ ...style, display: 'block' }}
+            onClick={onClick}
+        >
+            <FaArrowLeft />
+        </div>
+    );
+};
 
 interface Product {
     _id: string;
     title: string;
-    image: string;
+    image: string[];
     description: string;
     price: string;
     site: string;
@@ -32,6 +58,8 @@ const sliderSettings = {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
+    nextArrow: <NextArrow />,
+    prevArrow: <PrevArrow />
 };
 
 interface StoreDetailsProps {
@@ -40,13 +68,14 @@ interface StoreDetailsProps {
 
 const siteLogos: { [key: string]: string } = {
     riyasewana: riyasewana,
+    patpatlk:patpatLk,
     abans: abans,
     autolanka: autolanka,
     celltronic: celltronic,
     dialcom: dialcom,
     laptop: laptop,
     life_mobile: life_mobile,
-    nanotec: nanotec,
+    nanotek: nanotec,
     otc: otc,
     redtech: redtech,
     saleme: saleme,
@@ -68,7 +97,7 @@ function StoreDetails({ category }: StoreDetailsProps) {
             setLoading(true);
             setError(null);
             try {
-                const response = await fetch(`https://offdealz.lk/api/${category}?page=${page}`, {
+                const response = await fetch(`${import.meta.env.VITE_API_URL}${category}?page=${page}`, {
                     headers: {
                         'X-API-KEY': import.meta.env.VITE_API_KEY,
                     },
@@ -77,7 +106,7 @@ function StoreDetails({ category }: StoreDetailsProps) {
                 if (category === 'laptops') {
                     setProducts(data.laptops);
                 } else if (category === 'phones') {
-                    setProducts(data.phones);
+                    setProducts(data.mobilePhones);
                 } else if (category === 'bikes') {
                     setProducts(data.bike);
                 } else if (category === 'cars') {
@@ -99,14 +128,21 @@ function StoreDetails({ category }: StoreDetailsProps) {
         fetchProducts(currentPage, category);
     }, [category, currentPage]);
 
+    useEffect(() => {
+        if (expandedProductId) {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    }, [expandedProductId]);
+
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error: {error}</p>;
 
     const handleMoreInfoClick = (productId: string) => {
         if (expandedProductId === productId) {
-            setExpandedProductId(null); // Collapse if already expanded
+            setExpandedProductId(null);
+            setCurrentPage(1); // Reset the page when closing the expanded view
         } else {
-            setExpandedProductId(productId); // Expand the clicked card
+            setExpandedProductId(productId);
         }
     };
 
@@ -117,10 +153,19 @@ function StoreDetails({ category }: StoreDetailsProps) {
     const startPage = Math.max(1, currentPage - Math.floor(PAGE_SIZE / 2));
     const endPage = Math.min(totalPages, startPage + PAGE_SIZE - 1);
 
+    const groupedProducts = expandedProductId
+        ? products.reduce((acc, product) => {
+            if (!acc[product.site]) {
+                acc[product.site] = [];
+            }
+            acc[product.site].push(product);
+            return acc;
+        }, {} as { [key: string]: Product[] })
+        : { 'all': products };
+
     return (
         <div className="container mx-auto px-4">
             <div className="relative">
-                {/* Render the expanded card at the top */}
                 {expandedProductId && (
                     products
                         .filter(product => product._id === expandedProductId)
@@ -130,47 +175,42 @@ function StoreDetails({ category }: StoreDetailsProps) {
                                 className="fixed top-[7vh] left-0 right-0 z-20 bg-white shadow-lg h-[60vh] w-[80vw] mx-auto rounded-lg p-4"
                                 style={{ maxHeight: 'calc(100vh - 2rem)', overflowY: 'auto' }}
                             >
-                                {product.image.length > 1 ? (
-                                    <Slider {...sliderSettings}>
-                                        {product.image.map((img, index) => (
-                                            <div key={index}>
-                                                <img
-                                                    className="w-[25vw] h-[55vh] object-cover absolute left-1 top-2 bottom-2"
-                                                    src={img}
-                                                    alt={`Product ${product._id} - ${index}`}
-                                                />
-                                            </div>
-                                        ))}
-                                    </Slider>
-                                ) : (
-                                    <img
-                                        className="w-[25vw] h-[55vh] object-cover absolute left-1 top-2 bottom-2"
-                                        src={product.image[0]}
-                                        alt={`Product ${product._id}`}
-                                    />
-                                )}
+                                <div className="slider-container" style={{ width: '25vw', height: '1vh' }}>
+                                    {product.image.length > 1 ? (
+                                        <Slider {...sliderSettings}>
+                                            {product.image.map((img, index) => (
+                                                <div key={index}>
+                                                    <img
+                                                        className="object-cover w-full h-[55vh]"
+                                                        src={img}
+                                                        alt={`Product ${product._id} - ${index}`}
+                                                    />
+                                                </div>
+                                            ))}
+                                        </Slider>
+                                    ) : (
+                                        <img
+                                            className="object-cover w-full h-[55vh]"
+                                            src={product.image[0]}
+                                            alt={`Product ${product._id}`}
+                                        />
+                                    )}
+                                </div>
                                 <div className="relative">
-                                    {/*<img*/}
-                                    {/*    className=""*/}
-                                    {/*    src={product.image[0]}*/}
-                                    {/*    alt={`Product ${product._id}`}*/}
-                                    {/*/>*/}
                                     <button
                                         className="absolute top-4 right-4 text-3xl text-black"
-                                        onClick={() => setExpandedProductId(null)}
+                                        onClick={() => handleMoreInfoClick(product._id)}
                                     >
                                         &times;
                                     </button>
-                                    <div className="p-6 absolute right-20  top-0">
-
+                                    <div className="p-6 absolute right-20 top-0">
                                         <h2 className="text-xl font-semibold absolute right-20">{product.title}</h2>
                                         <p className="text-lg font-bold text-blue-400 absolute right-20 mt-14">Rs: {product.price}</p>
                                         <p className="text-sm text-gray-600 absolute right-20 mt-24">From: {product.site}</p>
-                                        <p className="mt-40 w-[35vw] ">{product.description}</p>
-
+                                        <p className="mt-40 w-[35vw]">{product.description}</p>
                                         <a href={product.url}>
-                                            <Button className=" mt-56 absolute right-20 bg-blue-500 font-bold hover:shadow-2xl rounded" >
-                                                Buy Now
+                                            <Button className="mt-56 absolute right-20 bg-blue-500 font-bold text-white hover:shadow-2xl rounded">
+                                                View Product
                                             </Button>
                                         </a>
                                     </div>
@@ -179,85 +219,111 @@ function StoreDetails({ category }: StoreDetailsProps) {
                         ))
                 )}
 
-                {/* Render the other products below the expanded card */}
-                <div
-                    className={`mt-8 ${expandedProductId ? 'pt-[50vh]' : ''} grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6`}>
-                    {products
-                        .filter(product => product._id !== expandedProductId)
-                        .map(product => (
-                            <div
-                                key={product._id}
-                                className="relative max-w-xs rounded-lg overflow-hidden shadow-lg bg-white transition-transform transform hover:scale-105 cursor-pointer"
-                                onClick={() => handleMoreInfoClick(product._id)}
-                            >
-                                <div className="h-64 overflow-hidden relative">
-                                    <img
-                                        className="w-full h-full object-cover transition-transform duration-300 ease-in-out"
-                                        src={product.image[0]}
-                                        alt={`Product ${product._id}`}
-                                    />
-                                    <img
-                                        className="absolute top-1 right-1 w-20 h-20"
-                                        src={siteLogos[product.site] || 'path/to/default/logo.png'}
-                                        alt={product.site}
-                                    />
+                <div className={`mt-8 ${expandedProductId ? 'pt-[60vh]' : ''}`}>
+                    {Object.entries(groupedProducts).map(([site, siteProducts]) => (
+                        <div key={site} className="mb-8">
+                            {site !== 'all' && (
+                                <div className="flex items-center justify-center mb-4 p-4 bg-gray-200 rounded-lg relative">
+                                    <div className="flex items-center justify-center">
+                                        <img
+                                            className="h-20 mx-4"
+                                            src={siteLogos[site] || 'path/to/default/logo.png'}
+                                            alt={site}
+                                        />
+                                        <div className="absolute left-1/2 transform -translate-x-1/2 text-xl font-bold text-gray-700">
+                                            {site}
+                                        </div>
+                                    </div>
                                 </div>
-                                <div className="px-6 py-6">
-                                    <div className="font-semibold text-lg mb-2">{product.title}</div>
-                                    <p className="font-bold mb-2 text-blue-400">Rs: {product.price}</p>
-                                    <div className="font-medium text-sm mb-8 text-gray-600">From: {product.site}</div>
-                                    <button
-                                        className="bg-gradient-to-r from-purple-500 to-indigo-500 text-white py-2 px-4 rounded hover:from-purple-600 hover:to-indigo-600 transition-colors duration-300 w-full"
-                                        onClick={(e) => {
-                                            e.stopPropagation(); // Prevent click event from bubbling up
-                                            handleMoreInfoClick(product._id);
-                                        }}
-                                    >
-                                        More Information
-                                    </button>
-                                </div>
+                            )}
+                            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+                                {siteProducts.map(product => (
+                                    <div key={product._id} className="bg-white shadow-lg rounded-lg overflow-hidden relative">
+                                        <div className="h-48 relative">
+                                            {product.image.length > 1 ? (
+                                                <Slider {...sliderSettings}>
+                                                    {product.image.map((img, index) => (
+                                                        <div key={index}>
+                                                            <img
+                                                                className="object-cover w-full h-48"
+                                                                src={img}
+                                                                alt={`Product ${product._id} - ${index}`}
+                                                            />
+                                                        </div>
+                                                    ))}
+                                                </Slider>
+                                            ) : (
+                                                <img
+                                                    className="w-full h-full object-cover transition-transform duration-300 ease-in-out"
+                                                    src={product.image[0]}
+                                                    alt={`Product ${product._id}`}
+                                                />
+                                            )}
+                                            <img
+                                                className="absolute top-1 right-1 w-20 h-20 p-2 bg-white rounded-full shadow-md"
+                                                src={siteLogos[product.site] || 'path/to/default/logo.png'}
+                                                alt={product.site}
+                                            />
+                                        </div>
+                                        <div className="px-6 py-6">
+                                            <div className="font-semibold text-lg mb-2">{product.title}</div>
+                                            <p className="font-bold mb-2 text-blue-400">Rs: {product.price}</p>
+                                            <div className="font-medium text-sm mb-8 text-gray-600">From: {product.site}</div>
+                                            <button
+                                                className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-blue-500 text-white px-4 py-2 rounded"
+                                                onClick={() => handleMoreInfoClick(product._id)}
+                                            >
+                                                More Information
+                                            </button>
+                                        </div>
+                                    </div>
+                                ))}
                             </div>
-                        ))}
+                        </div>
+                    ))}
                 </div>
-            </div>
-            <div className="flex justify-center mt-8 space-x-2">
-                <button
-                    className={`px-4 py-2 mx-1 rounded-full ${currentPage === 1 ? 'bg-gray-300 cursor-not-allowed' : 'bg-green-500 hover:bg-green-600'} text-white transition-colors duration-300`}
-                    onClick={() => handlePageChange(1)}
-                    disabled={currentPage === 1}
-                >
-                    First
-                </button>
-                <button
-                    className={`px-4 py-2 mx-1 rounded-full ${currentPage === 1 ? 'bg-gray-300 cursor-not-allowed' : 'bg-green-500 hover:bg-green-600'} text-white transition-colors duration-300`}
-                    onClick={() => handlePageChange(currentPage - 1)}
-                    disabled={currentPage === 1}
-                >
-                    Previous
-                </button>
-                {Array.from({ length: endPage - startPage + 1 }, (_, index) => (
-                    <button
-                        key={startPage + index}
-                        className={`px-4 py-2 mx-1 rounded-full ${currentPage === startPage + index ? 'bg-blue-700' : 'bg-blue-500 hover:bg-blue-600'} text-white transition-colors duration-300`}
-                        onClick={() => handlePageChange(startPage + index)}
-                    >
-                        {startPage + index}
-                    </button>
-                ))}
-                <button
-                    className={`px-4 py-2 mx-1 rounded-full ${currentPage === totalPages ? 'bg-gray-300 cursor-not-allowed' : 'bg-green-500 hover:bg-green-600'} text-white transition-colors duration-300`}
-                    onClick={() => handlePageChange(currentPage + 1)}
-                    disabled={currentPage === totalPages}
-                >
-                    Next
-                </button>
-                <button
-                    className={`px-4 py-2 mx-1 rounded-full ${currentPage === totalPages ? 'bg-gray-300 cursor-not-allowed' : 'bg-green-500 hover:bg-green-600'} text-white transition-colors duration-300`}
-                    onClick={() => handlePageChange(totalPages)}
-                    disabled={currentPage === totalPages}
-                >
-                    Last
-                </button>
+
+                {!expandedProductId && (
+                    <div className="flex justify-center mt-8 space-x-2">
+                        <button
+                            className={`px-3 py-1 rounded ${currentPage === 1 ? 'bg-gray-300 cursor-not-allowed' : 'bg-gray-200 text-gray-800'}`}
+                            onClick={() => handlePageChange(1)}
+                            disabled={currentPage === 1}
+                        >
+                            First
+                        </button>
+                        <button
+                            className={`px-3 py-1 rounded ${currentPage === 1 ? 'bg-gray-300 cursor-not-allowed' : 'bg-gray-200 text-gray-800'}`}
+                            onClick={() => handlePageChange(currentPage - 1)}
+                            disabled={currentPage === 1}
+                        >
+                            Previous
+                        </button>
+                        {Array.from({ length: endPage - startPage + 1 }, (_, index) => (
+                            <button
+                                key={startPage + index}
+                                className={`px-3 py-1 rounded ${currentPage === startPage + index ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-800'}`}
+                                onClick={() => handlePageChange(startPage + index)}
+                            >
+                                {startPage + index}
+                            </button>
+                        ))}
+                        <button
+                            className={`px-3 py-1 rounded ${currentPage === totalPages ? 'bg-gray-300 cursor-not-allowed' : 'bg-gray-200 text-gray-800'}`}
+                            onClick={() => handlePageChange(currentPage + 1)}
+                            disabled={currentPage === totalPages}
+                        >
+                            Next
+                        </button>
+                        <button
+                            className={`px-3 py-1 rounded ${currentPage === totalPages ? 'bg-gray-300 cursor-not-allowed' : 'bg-gray-200 text-gray-800'}`}
+                            onClick={() => handlePageChange(totalPages)}
+                            disabled={currentPage === totalPages}
+                        >
+                            Last
+                        </button>
+                    </div>
+                )}
             </div>
         </div>
     );
