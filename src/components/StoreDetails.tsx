@@ -11,7 +11,7 @@ import otc from "../assets/img/companies/otc.png";
 import redtech from "../assets/img/companies/redtech.jpeg";
 import saleme from "../assets/img/companies/saleme.png";
 import xmobile from "../assets/img/companies/xmobile.jpeg";
-import patpatLk from "../assets/img/companies/dowlaod.jpeg";
+import patpatLk from "../assets/img/companies/download.jpeg";
 import { Button } from "@nextui-org/react";
 import Slider, { CustomArrowProps } from 'react-slick';
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
@@ -45,7 +45,7 @@ const PrevArrow: React.FC<CustomArrowProps> = (props) => {
 interface Product {
     _id: string;
     title: string;
-    image: string[];
+    image: string[] | string;
     description: string;
     price: string;
     site: string;
@@ -97,7 +97,7 @@ function StoreDetails({ category }: StoreDetailsProps) {
             setLoading(true);
             setError(null);
             try {
-                const response = await fetch(`${import.meta.env.VITE_API_URL}${category}?page=${page}`, {
+                const response = await fetch(`https://offdealz.lk/api/${category}?page=${page}`, {
                     headers: {
                         'X-API-KEY': import.meta.env.VITE_API_KEY,
                     },
@@ -105,8 +105,8 @@ function StoreDetails({ category }: StoreDetailsProps) {
                 const data = await response.json();
                 if (category === 'laptops') {
                     setProducts(data.laptops);
-                } else if (category === 'phones') {
-                    setProducts(data.mobilePhones);
+                } else if (category === 'mobilePhones') {
+                    setProducts(data.mobile);
                 } else if (category === 'bikes') {
                     setProducts(data.bike);
                 } else if (category === 'cars') {
@@ -172,11 +172,11 @@ function StoreDetails({ category }: StoreDetailsProps) {
                         .map(product => (
                             <div
                                 key={product._id}
-                                className="fixed top-[7vh] left-0 right-0 z-20 bg-white shadow-lg h-[60vh] w-[80vw] mx-auto rounded-lg p-4"
+                                className="absolute top-0 left-0 right-0 z-20 bg-white shadow-lg h-[60vh] w-[80vw] mx-auto rounded-lg p-4"
                                 style={{ maxHeight: 'calc(100vh - 2rem)', overflowY: 'auto' }}
                             >
                                 <div className="slider-container" style={{ width: '25vw', height: '1vh' }}>
-                                    {product.image.length > 1 ? (
+                                    {Array.isArray(product.image) && product.image.length > 1 ? (
                                         <Slider {...sliderSettings}>
                                             {product.image.map((img, index) => (
                                                 <div key={index}>
@@ -191,7 +191,7 @@ function StoreDetails({ category }: StoreDetailsProps) {
                                     ) : (
                                         <img
                                             className="object-cover w-full h-[55vh]"
-                                            src={product.image[0]}
+                                            src={Array.isArray(product.image) ? product.image[0] : product.image}
                                             alt={`Product ${product._id}`}
                                         />
                                     )}
@@ -219,7 +219,7 @@ function StoreDetails({ category }: StoreDetailsProps) {
                         ))
                 )}
 
-                <div className={`mt-8 ${expandedProductId ? 'pt-[60vh]' : ''}`}>
+                <div className={`mt-8 ${expandedProductId ? 'pt-[70vh]' : ''}`}>
                     {Object.entries(groupedProducts).map(([site, siteProducts]) => (
                         <div key={site} className="mb-8">
                             {site !== 'all' && (
@@ -240,9 +240,9 @@ function StoreDetails({ category }: StoreDetailsProps) {
                                 {siteProducts.map(product => (
                                     <div key={product._id} className="bg-white shadow-lg rounded-lg overflow-hidden relative">
                                         <div className="h-48 relative">
-                                            {product.image.length > 1 ? (
+                                            {Array.isArray(product.image) && product.image.length > 1 ? (
                                                 <Slider {...sliderSettings}>
-                                                    {product.image.map((img, index) => (
+                                                        {product.image.map((img, index) => (
                                                         <div key={index}>
                                                             <img
                                                                 className="object-cover w-full h-48"
@@ -255,7 +255,7 @@ function StoreDetails({ category }: StoreDetailsProps) {
                                             ) : (
                                                 <img
                                                     className="w-full h-full object-cover transition-transform duration-300 ease-in-out"
-                                                    src={product.image[0]}
+                                                    src={Array.isArray(product.image) ? product.image[0] : product.image}
                                                     alt={`Product ${product._id}`}
                                                 />
                                             )}
