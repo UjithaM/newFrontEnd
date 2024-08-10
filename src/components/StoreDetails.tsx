@@ -64,6 +64,7 @@ const sliderSettings = {
 
 interface StoreDetailsProps {
     category: string;
+    searchQuery: string;
 }
 
 const siteLogos: { [key: string]: string } = {
@@ -84,7 +85,7 @@ const siteLogos: { [key: string]: string } = {
 
 const PAGE_SIZE = 3;
 
-function StoreDetails({ category }: StoreDetailsProps) {
+function StoreDetails({ category,searchQuery }: StoreDetailsProps) {
     const [products, setProducts] = useState<Product[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
@@ -153,16 +154,21 @@ function StoreDetails({ category }: StoreDetailsProps) {
     const startPage = Math.max(1, currentPage - Math.floor(PAGE_SIZE / 2));
     const endPage = Math.min(totalPages, startPage + PAGE_SIZE - 1);
 
-    const groupedProducts = expandedProductId
-        ? products.reduce((acc, product) => {
+    // Filter products based on search query
+    const filteredProducts = products.filter(product =>
+        product.title.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+
+
+    const groupedProducts = expandedProductId || searchQuery
+        ? filteredProducts.reduce((acc, product) => {
             if (!acc[product.site]) {
                 acc[product.site] = [];
-            }
-            acc[product.site].push(product);
-            return acc;
-        }, {} as { [key: string]: Product[] })
+                    }
+                    acc[product.site].push(product);
+                    return acc;
+                }, {} as { [key: string]: Product[] })
         : { 'all': products };
-
     return (
         <div className="container mx-auto px-4">
             <div className="relative">
