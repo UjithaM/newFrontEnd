@@ -1,18 +1,20 @@
 
 import CountdownTimer from '../countdown/CountdownTimer';
 
+import logo from '../../assets/img/logo.png';
+
 
 const Banner = ({ data }) => {
   return (
-    <div className="min-h-[500px] flex justify-center items-center">
-      <div className="w-full mr-5 ml-5">
+    <div className="min-h-[500px] flex justify-center items-center ">
+      <div className="w-full mr-5 ml-5 container">
         <div
           style={{ backgroundColor: data.bgColor }}
           className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center text-white rounded-lg"
         >
           {/* first col */}
           <div className="p-6 sm:p-8">
-            <img src="src/assets/img/logo.png" alt="logo" className="h-[60px] mb-2 bg-white rounded-xl" />
+            <img src={logo} alt="logo" className="h-[60px] mb-2 bg-white rounded-xl" />
             <p 
               data-aos="slide-right"
               className="text-lg">{data.discount}</p>

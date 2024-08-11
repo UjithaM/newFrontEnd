@@ -17,6 +17,8 @@ import Banner5 from "../../assets/img/banner5.png";
 import Banner6 from "../../assets/img/banner6.png";
 import Banner7 from "../../assets/img/banner7.png";
 import Banner8 from "../../assets/img/banner8.png";
+import iphone from "../../assets/img/iPhone.svg";
+import hp from "../../assets/img/hp-lap.png";
 
 import Footer from "../../components/footer/footer.tsx";
 import AboutUsPage from "../aboutUsPage/AboutUsPage.tsx";
@@ -41,7 +43,7 @@ function LandingPage() {
           discount: "50% off",
           title: "iPhone 11",
           date: "Valid till 31st Dec",
-          image: "src/assets/img/iPhone.svg",
+          image: iphone,
           title2: "Capture Your Moments",
           title3: "With Stunning Clarity",
           title4: "Available Now!",
@@ -80,7 +82,7 @@ function LandingPage() {
           discount: "Special Offer: 15% Off",
           title: "HP Pavilion Series",
           date: "Offer Ends on 31st Dec",
-          image: "src/assets/img/hp-lap.png",
+          image: hp,
           title2: "Unleash Productivity",
           title3: "With Power and Performance",
           title4: "Available Now!",
