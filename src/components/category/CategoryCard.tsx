@@ -9,7 +9,20 @@ const CategoryCard = (props) => {
       data-aos-delay="100"
     >
       <div
-        className={`w-[200px] h-[200px] rounded-full relative justify-center text-center flex drop-shadow-2xl bg-[#EAECEE] hover:scale-105 transition-transform duration-500 ease-in-out`}
+        className={`w-[200px] h-[200px] rounded-full relative justify-center text-center flex drop-shadow-2xl bg-[#EAECEE] hover:scale-110 transition-transform duration-500 ease-in-out`}
+        onClick={() => {
+          if  (props.title === "Cars") {
+            window.location.href = `/itemSearch/cars`
+          } else  if  (props.title === "Bikes") {
+            window.location.href = `/itemSearch/bikes`
+          } else  if  (props.title === "Laptops") {
+            window.location.href = `/itemSearch/laptops`
+          } else  if  (props.title === "MicroPhones") {
+            window.location.href = `/itemSearch/microphones`
+          } else  if  (props.title === "Smart Phones") {
+            window.location.href = `/itemSearch/mobilePhones`
+          }
+        }}
       >
         <img
           src={props.img}
