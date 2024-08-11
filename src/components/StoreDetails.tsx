@@ -196,7 +196,7 @@ function StoreDetails({ category,searchQuery }: StoreDetailsProps) {
                                         </Slider>
                                     ) : (
                                         <img
-                                            className="object-cover w-full h-[55vh]"
+                                            className="object-cover w-full "
                                             src={Array.isArray(product.image) ? product.image[0] : product.image}
                                             alt={`Product ${product._id}`}
                                         />
@@ -244,13 +244,13 @@ function StoreDetails({ category,searchQuery }: StoreDetailsProps) {
                             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
                                 {siteProducts.map(product => (
                                     <div key={product._id} className="bg-white shadow-lg rounded-lg overflow-hidden relative">
-                                        <div className="h-48 relative">
+                                        <div className="relative">
                                             {Array.isArray(product.image) && product.image.length > 1 ? (
                                                 <Slider {...sliderSettings}>
                                                         {product.image.map((img, index) => (
                                                         <div key={index}>
                                                             <img
-                                                                className="object-cover w-full h-48"
+                                                                className="object-cover w-full h-[55vh]"
                                                                 src={img}
                                                                 alt={`Product ${product._id} - ${index}`}
                                                             />
