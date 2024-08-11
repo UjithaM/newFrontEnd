@@ -17,8 +17,8 @@ function ItemSearch() {
             <Nav />
             <main className="container mx-auto px-4 py-20">
                 {/* Search Bar */}
-                <div className="my-6">
-                    <label className="input input-bordered flex items-center gap-2 w-25">
+                <div className="px-4">
+                    <label className="input input-bordered flex items-center gap-2 w-50 border-gray-400">
                         <input
                             type="text"
                             className="grow"

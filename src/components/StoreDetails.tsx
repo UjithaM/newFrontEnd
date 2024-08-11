@@ -210,12 +210,13 @@ function StoreDetails({ category,searchQuery }: StoreDetailsProps) {
                                         &times;
                                     </button>
                                     <div className="p-6 absolute right-20 top-0">
-                                        <h2 className="text-xl font-semibold absolute right-20">{product.title}</h2>
-                                        <p className="text-lg font-bold text-blue-400 absolute right-20 mt-14">Rs: {product.price}</p>
-                                        <p className="text-sm text-gray-600 absolute right-20 mt-24">From: {product.site}</p>
-                                        <p className="mt-40 w-[35vw]">{product.description}</p>
+                                        <h2 className="text-xl font-semibold">{product.title}</h2>
+                                        <p className="text-lg font-bold text-blue-400 ">Rs: {product.price}</p>
+                                        <p className="text-sm text-gray-600 font-bold">From: {product.site}</p>
+                                        <p className="0 w-[35vw]">{product.description}</p>
                                         <a href={product.url}>
-                                            <Button className="mt-56 absolute right-20 bg-blue-500 font-bold text-white hover:shadow-2xl rounded">
+                                            <Button
+                                                className="mt-3 bg-blue-500 font-bold text-white hover:shadow-2xl rounded">
                                                 View Product
                                             </Button>
                                         </a>
@@ -229,16 +230,14 @@ function StoreDetails({ category,searchQuery }: StoreDetailsProps) {
                     {Object.entries(groupedProducts).map(([site, siteProducts]) => (
                         <div key={site} className="mb-8">
                             {site !== 'all' && (
-                                <div className="flex items-center justify-center mb-4 p-4 bg-gray-200 rounded-lg relative">
-                                    <div className="flex items-center justify-center">
+                                <div
+                                    className="flex items-center justify-center mb-4 p-4 bg-gray-200 rounded-lg relative">
+                                <div className="flex items-center justify-center">
                                         <img
                                             className="h-20 mx-4"
                                             src={siteLogos[site] || 'path/to/default/logo.png'}
                                             alt={site}
                                         />
-                                        <div className="absolute left-1/2 transform -translate-x-1/2 text-xl font-bold text-gray-700">
-                                            {site}
-                                        </div>
                                     </div>
                                 </div>
                             )}
