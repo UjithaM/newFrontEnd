@@ -1,6 +1,8 @@
 
 import { FaMapMarkerAlt, FaEnvelope, FaBuilding, FaCalendarAlt } from 'react-icons/fa';
 
+import logo from '../../assets/img/logo.png';
+
 const AboutUsPage = () => {
   return (
     <div className="container px-4 mx-auto mt-12 mb-12">
@@ -15,7 +17,7 @@ const AboutUsPage = () => {
         <div className="text-center mx-auto mb-6">
           <img 
             className="w-1/2 md:w-1/4 h-auto mx-auto"
-            src="src/assets/img/logo.png" 
+            src={logo}
             alt="Logo" 
           />
         </div>

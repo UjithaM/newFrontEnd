@@ -9,6 +9,9 @@ import {
   FaWhatsapp,
 } from "react-icons/fa";
 
+import logo from "../../assets/img/logo.png";
+import qr from "../../assets/img/qr.png";
+
 export default function Footer() {
   const FooterLinks = [
     {
@@ -46,7 +49,7 @@ export default function Footer() {
             <div className="py-8 px-4">
               <a>
                 <img
-                  src="src/assets/img/logo.png"
+                  src={logo}
                   alt=""
                   className="w-[350px]"
                 />
@@ -121,7 +124,7 @@ export default function Footer() {
                   <div className="py-8 px-4">
                     <a>
                       <img
-                        src="src/assets/img/qr.png"
+                        src= {qr}
                         alt=""
                         className="w-[350px]"
                       />

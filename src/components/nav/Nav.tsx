@@ -31,47 +31,50 @@ function Nav() {
 
     return (
         <>
-           <nav className="px-5 w-full h-[60px] bg-[#FFFFFF] shadow-md flex justify-between items-center fixed top-0 left-0 w-full z-50 overflow-x-hidden overflow-hidden">
+           <nav className="px-5 w-full h-[60px] bg-[#FFFFFF] shadow-md flex justify-between  fixed top-0 left-0  z-50 overflow-x-hidden overflow-hidden">
                 {/* Logo */}
-                <div className="logo flex items-center max-[767px]:absolute max-[767px]:right-[2rem]">
-                    <img src={images.Logo} alt="logo" className="h-32 w-auto mr-2" />
-                </div>
+               <div className="flex justify-between items-center container">
 
-                {/* Desktop Menu */}
-                <ul className="hidden md:flex items-center">
-                    <li className="ml-6"><a href="/home" className="text-black text-sm font-normal py-1 px-2 rounded-lg hover:bg-gray-100 transition duration-300 font-poppins text-[18px]">Home</a></li>
-                    <li className="ml-6">
-                        <select
-                            className=" text-sm font-normal py-1 px-2 rounded-lg  transition duration-300 w-[100px] font-poppins"
-                            onChange={handleLinkClick}>
-                            <option value="" disabled={true} selected={true}>Products</option>
-                            <option value="laptops">Laptops</option>
-                            <option value="mobilePhones">Phones</option>
-                            <option value="microphones">Microphones</option>
-                            <option value="bikes">Bikes</option>
-                            <option value="cars">Cars</option>
-                        </select>
-                    </li>
-                    <li className="ml-6">
-                        <ScrollLink
-                            to="aboutUs"
-                            smooth={true}
-                            duration={500}
-                            className="text-black text-sm font-normal py-1 px-2 rounded-lg hover:bg-gray-100 transition duration-300 font-poppins text-[18px]"
-                        >
-                            About Us
-                        </ScrollLink>
-                    </li>
-                    <li className="ml-6"><a href="/contactUs" className="text-black text-sm font-normal py-1 px-2 rounded-lg hover:bg-gray-100 transition duration-300 font-poppins text-[18px]">Contact Us</a></li>
-                    <li className="ml-6"><a href="/signUp" className="text-black text-sm font-normal py-1 px-2 rounded-lg hover:bg-gray-100 transition duration-300 font-poppins text-[18px]">Register</a></li>
-                </ul>
+                   <div className="logo flex items-center max-[767px]:absolute max-[767px]:right-[2rem]">
+                       <img src={images.Logo} alt="logo" className="h-32 w-auto mr-2" />
+                   </div>
 
-                {/* Hamburger Menu */}
-                <div className="hamburger md:hidden cursor-pointer " onClick={toggleMenu}>
-                    <span className="line w-6 h-0.5 bg-black block mb-1"></span>
-                    <span className="line w-6 h-0.5 bg-black block mb-1"></span>
-                    <span className="line w-6 h-0.5 bg-black block mb-1"></span>
-                </div>
+                   {/* Desktop Menu */}
+                   <ul className="hidden md:flex items-center">
+                       <li className="ml-6"><a href="/home" className="text-black text-sm font-normal py-1 px-2 rounded-lg hover:bg-gray-100 transition duration-300 font-poppins text-[18px]">Home</a></li>
+                       <li className="ml-6">
+                           <select
+                               className=" text-sm font-normal py-1 px-2 rounded-lg  transition duration-300 w-[100px] font-poppins"
+                               onChange={handleLinkClick}>
+                               <option value="" disabled={true} selected={true}>Products</option>
+                               <option value="laptops">Laptops</option>
+                               <option value="mobilePhones">Phones</option>
+                               <option value="microphones">Microphones</option>
+                               <option value="bikes">Bikes</option>
+                               <option value="cars">Cars</option>
+                           </select>
+                       </li>
+                       <li className="ml-6">
+                           <ScrollLink
+                               to="aboutUs"
+                               smooth={true}
+                               duration={500}
+                               className="text-black text-sm font-normal py-1 px-2 rounded-lg hover:bg-gray-100 transition duration-300 font-poppins text-[18px]"
+                           >
+                               About Us
+                           </ScrollLink>
+                       </li>
+                       <li className="ml-6"><a href="/contactUs" className="text-black text-sm font-normal py-1 px-2 rounded-lg hover:bg-gray-100 transition duration-300 font-poppins text-[18px]">Contact Us</a></li>
+                       <li className="ml-6"><a href="/signUp" className="text-black text-sm font-normal py-1 px-2 rounded-lg hover:bg-gray-100 transition duration-300 font-poppins text-[18px]">Register</a></li>
+                   </ul>
+
+                   {/* Hamburger Menu */}
+                   <div className="hamburger md:hidden cursor-pointer " onClick={toggleMenu}>
+                       <span className="line w-6 h-0.5 bg-black block mb-1"></span>
+                       <span className="line w-6 h-0.5 bg-black block mb-1"></span>
+                       <span className="line w-6 h-0.5 bg-black block mb-1"></span>
+                   </div>
+               </div>
             </nav>
 
             {/* Mobile Menu */}

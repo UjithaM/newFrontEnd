@@ -24,8 +24,8 @@ const Landing = ({ bannerImages }: { bannerImages: string[] }) => {
   };
 
   return (
-    <div className="relative rounded-3xl">
-      <div className="mt-[80px] mx-8 sm:mx-8 lg:mx-16 rounded-3xl"> {/* Adjust margin for responsiveness */}
+    <div className="relative rounded-3xl container">
+      <div className="mt-[80px]   rounded-3xl"> {/* Adjust margin for responsiveness */}
         <div className="overflow-hidden rounded-3xl">
           <Slider {...settings}>
             {bannerImages.map((banner, index) => (
